@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block content %}
+ <body>
+  <div class="site-wrap">
+
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+
+    <div class="site-navbar-wrap js-site-navbar bg-white">
+
+      <div class="container">
+        <div class="site-navbar bg-light">
+          <div class="py-1">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <h2 class="mb-0 site-logo"><a href="/home/">Hoodys</a></h2>
+              </div>
+              <div class="col-10">
+                <nav class="site-navigation text-right" role="navigation">
+                  <div class="container">
+
+                    <div class="d-inline-block d-lg-none  ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle"><span class="icon-menu h3"></span></a></div>
+                    <ul class="site-menu js-clone-nav d-none d-lg-block">
+                      <li><a href="/home/">Home</a></li>
+                      <li class="active"><a href="/hotels/">Hotels</a></li>
+                      <li><a href="events.html">Events</a></li>
+                      <li><a href="/about/">About</a></li>
+                      <li><a href="contact.html">Contact</a></li>
+                      {% if user.is_staff %}
+                      <li><a href="/my_ads/"style="color:white;"><button class="btn btn-primary pill text-white px-4">My Ads</button></a>
+                      {% endif %}
+                      {% if user.is_authenticated %}
+                      <li><a href="/logout/"style="color:white;"><button class="btn btn-primary pill text-white px-4">Log out</button></a>
+                      {% else %}
+
+                      <li><a href="#ex1" rel="modal:open"style="color:white;"><button class="btn btn-primary pill text-white px-4">Sign up</button></a>
+                      <li><a href="#ex2" rel="modal:open"style="color:white;"><button class="btn btn-primary pill text-white px-4">Log in</button></a>
+                      {% endif %}
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contaoner-fluid" style="background:black;height:150px;"></div>
+    <div class="site-section bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto text-center mb-5 section-heading">
+            <h2 class="mb-5"> Our Hotels</h2>
+          </div>
+        </div>
+          <div class="row">
+              {% for h in hotels %}
+              <div class="col-4">
+                  <a href="{{ h.photo.url }}"><img src="{{ h.photo.url }}" width="350"height="250"></a>
+                  <h3>{{h.name}}</h3>
+                  <button class="btn btn-primary pill text-white px-4">details</button>
+              </div>
+              {% endfor %}
+              </div>
+          </div>
+      </div>
+  </div>
+ </body>
+{% endblock %}
